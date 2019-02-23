@@ -1,0 +1,94 @@
+<!--doctype html--><html><head>
+  <meta charset=utf-8>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>1999 Memory game</title>
+  <link rel=stylesheet href=css.css>
+  <script src=logica.js></script>
+  <script src=trampes.js></script>
+  <script>
+    function init() {
+      let arr=[
+        "<img src=img/aina.jpg>",    "<img src=img/aina.jpg>",
+        "<img src=img/alba.jpg>",    "<img src=img/alba.jpg>",
+        "<img src=img/alex.jpg>",    "<img src=img/alex.jpg>",
+        "<img src=img/diana.jpg>",   "<img src=img/diana.jpg>",
+        "<img src=img/fede.jpg>",    "<img src=img/fede.jpg>",
+        "<img src=img/frans.jpg>",   "<img src=img/frans.jpg>",
+        "<img src=img/jaume.jpg>",   "<img src=img/jaume.jpg>",
+        "<img src=img/laura.jpg>",   "<img src=img/laura.jpg>",
+        "<img src=img/lluis.jpg>",   "<img src=img/lluis.jpg>",
+        "<img src=img/marius.jpg>",  "<img src=img/marius.jpg>",
+        "<img src=img/nuria.jpg>",   "<img src=img/nuria.jpg>",
+        "<img src=img/paton.jpg>",   "<img src=img/paton.jpg>",
+        "<img src=img/queralt.jpg>", "<img src=img/queralt.jpg>",
+        "<img src=img/rosa.jpg>",    "<img src=img/rosa.jpg>",
+        "<img src=img/rut.jpg>",     "<img src=img/rut.jpg>",
+        "<img src=img/sandra.jpg>",  "<img src=img/sandra.jpg>",
+      ];
+      listeners();//crea onclick listeners
+      reparteix(arr);
+      iniciaTemps();//compta temps des de zero
+      let audio=new Audio('snd/new.wav'); audio.play(); //new game sound
+    }
+  </script>
+</head><body onload=init()>
+<!--title-->
+<h2>Regal Queralt 1999</h2>
+<h3>Tites i tetes memory game</h3>
+
+<!--preload imgs pq carregui més ràpid-->
+<div style=display:none>
+  <script>
+    function preload() {
+      for(i=0;i<preload.arguments.length;i++) {
+        (new Image()).src="img/"+preload.arguments[i]+".jpg";
+      }
+    }
+    preload("aina","alba","alex","diana","fede","frans","jaume","laura","lluis","marius","nuria","paton","queralt","rosa","rut","sandra");
+    //sounds 
+    new Audio('snd/ding.wav');
+    new Audio('snd/click.wav');
+    new Audio('snd/new.wav');
+    new Audio('snd/win.wav');
+  </script>
+</div>
+
+<!--tablero-->
+<table id=tablero>
+  <script>
+    let files=4,columnes=8;
+    for(let i=0;i<files;i++) {
+      document.write("<tr fil="+i+">");
+      for(let j=0;j<columnes;j++){document.write("<td col="+j+">")}
+    }
+  </script>
+</table>
+
+<!--trampes-->
+<div id=trampes>
+  <div style="padding:0.3em 0">
+    <span> Trampes disponibles: <b id=comptador_trampes>5</b> </span> |
+    <span> Temps <b id=comptador_temps>0</b>" </span>
+  </div>
+  <button id=btn_trampes onclick=Trampes.random()>Fer trampes</button>
+  <div style=text-align:left;padding:1em;>
+    Fer trampes està prohibit, però si ets la Queralt pots fer trampes 5 vegades per partida.
+    No sempre funcionaran, passaran "coses random", <i>if you know what I mean</i>:
+  </div>
+  <ul style=text-align:left;>
+    <li> <b>Mics dia</b>: revela totes les caselles durant un instant.
+    <li> <b>Visc al límit</b>: t'han pillat, es reinicia el joc.
+    <li> <b>Shame</b>: notificació de "La Queralt està fent trampes al solitari".
+    <li> <b>Res</b>: no passa res. Sort, o mala sort?
+    <li> <b>Queralisme</b>: guanyes directament... però perds la diversió. O guanyar és la diversió?
+    <li> <b>Com volent dir</b>: obre una pàgina random de la wikipedia.
+    <li> <b>Felices vegílies</b>: revela una pista a l'atzar.
+    <li> <b>Avui no dormo</b>: reinicia el temps de joc.
+    <li> <b>Aibó</b>: revela la posició de la Queralt. 
+    <li> <b>L'important és participar</b>: revela 3 caselles <i>a l'atzar</i>.
+  </ul>
+</div>
+
+<!--footer-->
+<div style=padding:0.3em;text-align:center;font-size:10px;margin-top:1em;font-style:italic;background:#eee> Feliç 1999! &#128157; </div>
+<div id=footer> Tites i tetes software © Copyright 1989-2016 </div>
